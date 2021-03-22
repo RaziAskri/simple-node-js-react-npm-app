@@ -1,5 +1,5 @@
 FROM node
-WORKDIR /usr/src/app
+WORKDIR /usr/src
 RUN npm install
 COPY . .
 EXPOSE 3000

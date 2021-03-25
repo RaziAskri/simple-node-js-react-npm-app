@@ -21,7 +21,7 @@ metadata:
 spec:
   type: LoadBalancer
   externalIPs:
-  - 192.168.43.20:6443
+  - 192.168.59.2:8443
   selector:
     app: chitchat
   ports:

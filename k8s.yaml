@@ -1,29 +1,18 @@
-apiVersion: apps/v1beta1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: chitchat
+  name: sample-k8s-deployment
 spec:
-  replicas: 2
+  replicas: 1
   template:
     metadata:
-      name: chitchat
       labels:
-        app: chitchat
+        app: sample-k8s-app
     spec:
       containers:
-      - image: $dockerhuburl:$BUILD_NUMBER
-        name: nodejs
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: loadbalancer
-spec:
-  type: LoadBalancer
-  externalIPs:
-  - 192.168.59.2:8443
-  selector:
-    app: chitchat
-  ports:
-  - port: 8080
-    targetPort: 4141
+      - name: sample-k8s-app-container
+        image: razi01/delivery-repo:jenkins
+        ports:
+        - containerPort: 8080
+      imagePullSecrets:
+      - name: $KUBERNETES_SECRET_NAME
